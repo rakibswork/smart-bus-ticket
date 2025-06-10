@@ -9,134 +9,176 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.6.1/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter&family=Raleway&display=swap" rel="stylesheet">
-    <!-- <script src="scripts/bus.js" defer></script> -->
-    <script>
+    <script src="scripts/bus.js" defer></script>
+
+    <script defer>
 
         document.addEventListener("DOMContentLoaded", function () {
+
             const seatButtons = document.querySelectorAll(".seat-btn");
             const pricePerSeat = 550;
-            const seatCount = document.getElementById("seat-count");
             const selectedSeatsTable = document.getElementById("selected-seats-table");
-            const totalPriceDisplay = document.getElementById("total-price");
-            const grandTotalDisplay = document.getElementById("grand-total");
+            const seatCount = document.getElementById("seat-count");
+            const totalPrice = document.getElementById("total-price");
+            const grandTotal = document.getElementById("grand-total");
             const couponInput = document.getElementById("coupon-input");
-            const applyCouponBtn = document.getElementById("apply-coupon");
+            const applyCoupon = document.getElementById("apply-coupon");
             const couponMessage = document.getElementById("coupon-message");
             const bookingForm = document.getElementById("booking-form");
 
             let currentDiscount = 0;
 
+
             seatButtons.forEach(button => {
-                button.classList.add("w-16", "h-16", "bg-gray-300", "rounded", "hover:bg-gray-400", "font-bold", "transition");
+                button.classList.add(
+                    "w-16",
+                    "h-16",
+                    "bg-gray-300",
+                    "rounded",
+                    "hover:bg-gray-400",
+                    "font-bold",
+                    "transition"
+                );
             });
 
-            seatButtons.forEach(button => {
-                button.addEventListener("click", () => {
-                    const isSelected = button.classList.contains("bg-green-500");
+            seatButtons.forEach(function (button) {
+                button.addEventListener("click", function () {
+
+                    const isSelectedSeats = button.classList.contains("bg-green-500");
                     const selectedSeats = document.querySelectorAll(".seat-btn.bg-green-500");
 
-                    if (isSelected) {
+                    if (isSelectedSeats) {
                         button.classList.remove("bg-green-500", "text-white");
                         button.classList.add("bg-gray-300");
-                    } else {
+                    }
+                    else {
                         if (selectedSeats.length >= 4) {
                             alert("You can select a maximum of 4 seats.");
                             return;
                         }
                         button.classList.add("bg-green-500", "text-white");
                         button.classList.remove("bg-gray-300");
-
                     }
                     updateSeatTable();
-                });
-            });
+                })
+
+            })
 
             function updateSeatTable() {
+
                 selectedSeatsTable.innerHTML = "";
                 const selectedSeats = document.querySelectorAll(".seat-btn.bg-green-500");
                 seatCount.textContent = selectedSeats.length;
 
                 let total = 0;
-                selectedSeats.forEach(seat => {
+
+                selectedSeats.forEach(function (seat) {
+
                     const row = document.createElement("tr");
                     row.innerHTML = `
-                <td class="border p-2">${seat.textContent}</td>
-                <td class="border p-2">Economy</td>
-                <td class="border p-2">550</td>
-              `;
+         <td class="border p-2">${seat.textContent}</td>
+            <td class="border p-2">Economy</td>
+            <td class="border p-2">550</td>
+            `
                     selectedSeatsTable.appendChild(row);
+
                     total += pricePerSeat;
-                });
+                })
 
-                totalPriceDisplay.textContent = total;
-                let grandTotal = total - currentDiscount;
-                if (grandTotal < 0) grandTotal = 0;
-                grandTotalDisplay.textContent = grandTotal;
+                totalPrice.textContent = total;
 
-                couponMessage.textContent = "";
-                currentDiscount = 0;
-                couponInput.value = "";
+                let GrandTotal = total - currentDiscount;
+
+                if (GrandTotal < 0) {
+                    GrandTotal = 0
+                }
+                else {
+                    grandTotal.textContent = GrandTotal;
+                }
+
             }
 
-            applyCouponBtn.addEventListener("click", () => {
-                const couponCode = couponInput.value.trim().toUpperCase();
-                const totalPrice = parseInt(totalPriceDisplay.textContent);
 
-                if (totalPrice === 0) {
-                    couponMessage.textContent = "Please select seats first.";
-                    couponMessage.style.color = "red";
+            applyCoupon.addEventListener("click", function () {
+
+                const couponCode = couponInput.value.trim();
+                const total = parseInt(totalPrice.textContent);
+
+                if (total === 0) {
+                    couponMessage.textContent = "Please,Select a seat first."
+                    couponMessage.style.color("red");
                     return;
                 }
 
-                if (couponCode === "COUPON10") {
-                    currentDiscount = Math.floor(totalPrice * 0.10);
-                    couponMessage.textContent = "Coupon applied! You got 10% off.";
+                if (couponCode === "NEW15") {
+
+                    currentDiscount = Math.floor(total * 0.15);
+                    couponMessage.textContent = "You got a 15% discount";
                     couponMessage.style.color = "green";
-                } else if (couponCode === "SAVE100") {
-                    currentDiscount = 100;
-                    couponMessage.textContent = "Coupon applied! You saved 100 BDT.";
+                }
+                else if (couponCode === "Couple20") {
+
+                    currentDiscount = Math.floor(total * 0.20);
+                    couponMessage.textContent = "You got a 20% couple discount";
                     couponMessage.style.color = "green";
-                } else {
+
+                }
+                else {
                     currentDiscount = 0;
-                    couponMessage.textContent = "Invalid coupon code.";
+                    couponMessage.textContent = "Invalid code.Please use the correct code";
                     couponMessage.style.color = "red";
                 }
 
-                let grandTotal = totalPrice - currentDiscount;
-                if (grandTotal < 0) grandTotal = 0;
-                grandTotalDisplay.textContent = grandTotal;
-            });
+                let finalTotal = total - currentDiscount;
+                if (finalTotal < 0) finalTotal = 0;
+                grandTotal.textContent = finalTotal;
+            })
 
             bookingForm.addEventListener("submit", function (event) {
+
                 event.preventDefault();
 
-                const name = document.getElementById("name-input").value.trim();
-                const email = document.getElementById("email-input").value.trim();
                 const selectedSeats = document.querySelectorAll(".seat-btn.bg-green-500");
+                const Name = document.getElementById("name-input").value.trim();
+                const Number = document.getElementById("phone-input").value.trim();
+                const Email = document.getElementById("email-input").value.trim();
 
                 if (selectedSeats.length === 0) {
                     alert("Please select at least one seat.");
                     return;
                 }
-                if (name === "") {
-                    alert("Please enter your name.");
+
+                if (Name === "") {
+                    alert("Please,enter your Name");
                     return;
                 }
-                if (email === "") {
-                    alert("Please enter your email.");
+                if (Number === "") {
+                    alert("Please,enter your Number");
+                    return;
+                }
+                if (Email === "") {
+                    alert("Please,enter your Email");
                     return;
                 }
 
-                alert(`Thank you, ${name}! Your booking for ${selectedSeats.length} seat(s) is confirmed.\nGrand Total: ${grandTotalDisplay.textContent} BDT.`);
+                alert(`Thank Yoy,Sir ${Name}! Your booking is confirm) ${selectedSeats.length} seat(s) is confirmed.\nGrand Total: ${grandTotal.textContent} BDT.`)
+
+                document.getElementById("success-message").classList.remove("hidden");
+
+                setTimeout(() => {
+                    document.getElementById("success-message").classList.add("hidden");
+                }, 5000);
 
                 bookingForm.reset();
                 seatButtons.forEach(button => button.classList.remove("bg-green-500", "text-white"));
                 updateSeatTable();
-            });
+            })
+
+
+            // Other event listeners and logic can go here too
         });
-
     </script>
-
+    
 </head>
 
 <body class="font-raleway">
@@ -623,7 +665,7 @@
                                 <div>
                                     <label class="block font-semibold">Phone Number*</label>
                                     <input id="phone-input" type="text" class="w-full p-2 border rounded"
-                                        placeholder="Enter your phone" />
+                                        placeholder="Enter your phone" required />
                                 </div>
                                 <div>
                                     <label class="block font-semibold">Email ID</label>
@@ -633,10 +675,15 @@
 
                                 <div class="flex justify-center">
                                     <button type="submit"
-                                        class="bg-green-500 text-white px-6 py-2 rounded w-2/3">Next</button>
+                                        class="bg-green-500 text-white btn px-6 py-2 rounded w-2/3">Next</button>
                                 </div>
 
                             </form>
+
+                            <div id="success-message" class="hidden text-center mt-4">
+                                <img src="images/success.png" alt="Success" class="mx-auto w-32 h-32" />
+                                <p class="text-green-600 font-bold text-lg mt-2">Booking Confirmed Successfully!</p>
+                            </div>
 
 
                         </div>
