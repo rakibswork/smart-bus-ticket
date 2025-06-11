@@ -13,16 +13,16 @@
 
     <style>
         :root {
-          color-scheme: light;
+            color-scheme: light;
         }
-    
+
         @media (prefers-color-scheme: dark) {
-          body {
-            background-color: white;
-            color: black;
-          }
+            body {
+                background-color: white;
+                color: black;
+            }
         }
-      </style>
+    </style>
 
     <script defer>
 
@@ -191,12 +191,12 @@
             // Other event listeners and logic can go here too
         });
     </script>
-    
+
 </head>
 
 <body class="font-raleway">
 
-    <header class="mr-[120px] ml-[120px]">
+    <header class=" mx-4 sm:mx-12 md:mx-[80px] lg:mx-[120px]">
 
 
         <div class="navbar bg-base-100 shadow-sm">
@@ -243,7 +243,7 @@
 
         <!-- banner section -->
 
-        <section class="mt-[30px] mr-[120px] ml-[120px]">
+        <section class="mt-6 mx-4 sm:mx-12 md:mx-[80px] lg:mx-[120px] lg:mt-[30px]">
 
             <div class="relative w-full h-full rounded-[32px] shadow-none ">
                 <!-- Background image -->
@@ -253,7 +253,7 @@
                 <div class="absolute inset-0 bg-gradient-to-b from-[#03071280] to-[#03071200] rounded-[32px]"></div>
 
                 <!-- Text on top -->
-                <div class="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4">
+                <div class="absolute inset-0 flex flex-col justify-center items-center text-center  text-white px-4">
                     <h1 class="text-5xl font-bold mb-4">End-to-End Travel with</h1>
                     <h1 class="text-5xl font-bold mb-4">P Paribahan</h1>
                     <p class="max-w-md mb-4">
@@ -261,7 +261,7 @@
                         features allow for a streamlined.
                     </p>
                     <button
-                        class="bg-[#1DD100] text-black px-6 py-2 rounded-lg font-semibold hover:bg-[#17b100] transition btn">Buy
+                        class="bg-[#1DD100] text-black  px-6 py-2 rounded-lg font-semibold hover:bg-[#17b100] transition btn">Buy
                         Tickets</button>
                 </div>
             </div>
@@ -270,7 +270,7 @@
 
             <div class=" ">
 
-                <div class="font-inter flex justify-between mx-32 ">
+                <div class="font-inter flex sm:mt-6 sm:justify-evenly lg:justify-between lg:mx-32 ">
 
                     <div
                         class="flex justify-center gap-3 px-8 py-8 bg-[#FFFFFF] rounded-3xl border-b-[3px] border-b-[rgb(29,209,0)]">
@@ -312,7 +312,7 @@
             <div class="flex flex-col justify-center text-center items-center gap-y-14">
 
                 <h1 class="text-4xl font-bold">Best offers for you</h1>
-                <div class="flex gap-x-6">
+                <div class="flex flex-col lg:flex-row gap-6 w-full justify-center items-center">
 
 
                     <div class="flex bg-[#FFBF0F] rounded-3xl">
@@ -367,7 +367,7 @@
             <div class=" mr-[120px] ml-[120px]">
 
 
-                <div class="flex flex-row max-w-full bg-[#FFFFFF] rounded-3xl">
+                <div class="flex flex-col lg:flex-row max-w-full bg-[#FFFFFF] rounded-3xl">
 
                     <!-- 1st line -->
 
@@ -402,7 +402,7 @@
 
                                 <div class="bg-[#F7F8F8]">
 
-                                    <div class="flex justify-between">
+                                    <div class="flex justify-evenly lg:justify-between">
 
                                         <div>
                                             <p class="text-lg font-semibold text-[#03071299]">Route</p>
@@ -453,7 +453,7 @@
 
 
 
-                    <div><img src="images/info-devider.png" alt="" srcset=""></div>
+                    <div class="hidden sm:block"><img src="images/info-devider.png" alt="" srcset=""></div>
 
                     <div>
 
@@ -479,7 +479,8 @@
 
             <!-- seat booking section -->
 
-            <div class="bg-[#FFFFFF] rounded-3xl grid grid-cols-2 gap-x-16 mr-[120px] ml-[120px] mt-6">
+            <div
+                class="bg-[#FFFFFF] rounded-3xl grid grid-cols-1 lg:grid-cols-2 gap-6 mx-4 sm:mx-12 md:mx-[80px] lg:mx-[120px] mt-6">
 
                 <!-- the div will flex  -->
 
